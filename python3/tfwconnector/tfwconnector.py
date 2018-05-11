@@ -5,7 +5,7 @@ import os
 
 import zmq
 
-from serialization import serialize_tfw_msg
+from .serialization import serialize_tfw_msg
 
 
 class TFWServerConnector:
