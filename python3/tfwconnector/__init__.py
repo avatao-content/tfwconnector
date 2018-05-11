@@ -2,3 +2,4 @@
 # All Rights Reserved. See LICENSE file for details.
 
 from .tfw_server_connector import TFWServerConnector
+from .message_sender import MessageSender
