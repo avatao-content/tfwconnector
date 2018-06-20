@@ -21,7 +21,6 @@ public class TFWServerConnector {
     private ZMQ.Context context;
     private ZMQ.Socket pushSocket;
 
-    /** URL to the socket responsible for TFW communication. */
     private String socketUrl;
 
     public TFWServerConnector() {
