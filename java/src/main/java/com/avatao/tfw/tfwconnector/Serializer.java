@@ -43,20 +43,11 @@ public class Serializer {
      * @return multipart TFW message
      */
     public static List<String> serializeTFWMessage(ObjectNode message) {
-        return serialize(message);
-    }
-
-    /** 
-     * Creates a multipart message out of a JSON Object.
-     * @param data the JSON object to be serialized.
-     * @return multipart message where the parts are in a List
-     */
-    private static List<String> serialize(ObjectNode data) {
         /* Encode key in UTF-8. */
-        String rawKey = data.get("key").asText();
+        String rawKey = message.get("key").asText();
         String key = encodeToUtf8(rawKey);
     
-        String value = data.toString();
+        String value = message.toString();
 
         /* Add message parts to the list. */
         List<String> messageParts = new ArrayList<String>();
