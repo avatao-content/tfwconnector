@@ -13,7 +13,7 @@ class MessageSender{
     }
 
     send(key, data){
-        let messageToSend = createTFWMessage(key, data);
+        let messageToSend = createTFWMessage(data);
         this.connector.pushSocket.send(messageToSend);
     }
 
@@ -27,11 +27,11 @@ class MessageSender{
                 message: message
             }
         };
-        let messageToSend = createTFWMessage(key, data);
+        let messageToSend = createTFWMessage(data);
         this.connector.pushSocket.send(messageToSend);
     }
-
-    sendMessageQue(messages){
+    //TODO waiting for it to be implemented by core team
+    sendMessages(messages){
         if(Array.isArray(messages) && messages.length > 0){
             messages.forEach(message=>{
                 console.log("Sending message: " + message);
@@ -46,14 +46,14 @@ class MessageSender{
             key: key,
             data: message
         };
-        let messageToSend = createTFWMessage(key, data);
+        let messageToSend = createTFWMessage(data);
         this.connector.pushSocket.send(messageToSend);
     }
 
 }
 
-let createTFWMessage = (key, message) => {
-    return [Buffer.from(key), Buffer.from(JSON.stringify(message))]
+let createTFWMessage = (message) => {
+    return [Buffer.from(message.key), Buffer.from(JSON.stringify(message))]
 };
 
 module.exports = MessageSender;
