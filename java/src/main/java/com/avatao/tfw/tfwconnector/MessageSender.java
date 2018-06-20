@@ -21,9 +21,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  *  displays messages with the key "message".
  */
 public class MessageSender {
-    /** Server connector to send messages. */
     private TFWServerConnector serverConnector;
-    /** Key of the messages that the class sends. */
     private String key;
 
     public MessageSender() {
@@ -73,8 +71,7 @@ public class MessageSender {
     }
 
     /**
-      * Return current date time in ISO format.
-      * @return Current date time in ISO format.
+      * @return current date time in ISO format
       */
     private String getIsoDateTime() {
         TimeZone timeZone = TimeZone.getTimeZone("UTC");
