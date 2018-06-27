@@ -1,7 +1,7 @@
 # Copyright (C) 2018 Avatao.com Innovative Learning Kft.
 # All Rights Reserved. See LICENSE file for details.
 
-from tfw.networking.event_handlers import ServerUplinkConnector
+from .tfw_server_connector import TFWServerConnector
 
 
 class MessageSender:
@@ -9,7 +9,7 @@ class MessageSender:
     Provides mechanisms to send messages to our frontend messaging component.
     """
     def __init__(self):
-        self.server_connector = ServerUplinkConnector()
+        self.server_connector = TFWServerConnector()
         self.key = 'message'
         self.queue_key = 'queueMessages'
 
