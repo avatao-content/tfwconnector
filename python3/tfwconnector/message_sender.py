@@ -1,30 +1,47 @@
 # Copyright (C) 2018 Avatao.com Innovative Learning Kft.
 # All Rights Reserved. See LICENSE file for details.
 
-from datetime import datetime
-
-from .tfw_server_connector import TFWServerConnector
+from tfw.networking.event_handlers import ServerUplinkConnector
 
 
 class MessageSender:
     """
-    Provides a mechanism to send messages to our frontend messaging component which
-    displays messages with the key "message".
+    Provides mechanisms to send messages to our frontend messaging component.
     """
-    def __init__(self, custom_key: str = None):
-        self.server_connector = TFWServerConnector()
-        self.key = custom_key or 'message'
+    def __init__(self):
+        self.server_connector = ServerUplinkConnector()
+        self.key = 'message'
+        self.queue_key = 'queueMessages'
 
     def send(self, originator, message):
         """
-        Sends a message to the key specified in __init__.
+        Sends a message.
         :param originator: name of sender to be displayed on the frontend
         :param message: message to send
         """
         data = {
             'originator': originator,
-            'timestamp': datetime.now().isoformat(),
             'message': message
         }
-        self.server_connector.send({'key': self.key,
-                                    'data': data})
+        self.server_connector.send({
+            'key': self.key,
+            'data': data
+        })
+
+    def queue_messages(self, originator, messages):
+        """
+        Queues a list of messages to be displayed in a chatbot-like manner.
+        :param originator: name of sender to be displayed on the frontend
+        :param messages: list of messages to queue
+        """
+        data = {
+            'messages': [
+                {'message': message, 'originator': originator}
+                for message in messages
+            ]
+        }
+        self.server_connector.send({
+            'key': self.queue_key,
+            'data': data
+        })
+
