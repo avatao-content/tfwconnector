@@ -26,7 +26,7 @@ void TFWServerConnector::send_to_eventhandler(ptree message) {
     try {
         nested_message.put("key", message.get<std::string>("key"));
         nested_message.put_child("data", message.get_child("data"));
-    } catch(...) {
+    } catch(boost::property_tree::ptree_bad_path& path_error) {
         throw std::runtime_error("Invalid message format!");
     }
 

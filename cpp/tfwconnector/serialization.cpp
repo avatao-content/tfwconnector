@@ -13,7 +13,7 @@ std::vector<std::string> tfwconnector::serialize_TFW_message(ptree message) {
     /* Check if key field exists. */
     try {
         key = message.get<std::string>("key");
-    } catch(...) {
+    } catch(boost::property_tree::ptree_bad_path& path_error) {
         throw std::runtime_error("Invalid message format!");
     }
 
