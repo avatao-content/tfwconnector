@@ -1,10 +1,10 @@
 # TFWConnector - C++
 
-This is a short desciption about how to use C++ TFWConnector.
+This is a short desciption on how to use C++ TFWConnector.
 
 ## Requirements
 
-The JSON parsing of this project uses the `boost` library. To install that library, run `apt-get install libboost-dev` command. This project also has a dependency for dynamic libraries called libzmq and cppzmq. To install them, simply use these snippets:
+The JSON parsing of this project uses the `boost` library. To install that library, run the `apt-get install libboost-dev` command. This project also has a dependency for dynamic libraries called libzmq and cppzmq. To install them, simply use these snippets:
 
 libzmq:
 ```text
@@ -28,7 +28,7 @@ make install
 
 ## How to build
 
-When you compile the files, you have to depend on libzmq:
+When you compile the files, you have to link libzmq:
 **g++:**
 ```text
 -lzmq
@@ -42,4 +42,4 @@ include_directories(${cppzmq_INCLUDE_DIR})
 
 ## Version
 
-This project uses C++11 elements, it is the only project requirement.
+This project requires `C++11` to compile.
