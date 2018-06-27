@@ -29,10 +29,10 @@ When you run the final jar file of your project, do not forget to use `-Djava.li
 
 ## How to build
 
-There are two main options to build this package:
+There are two options to build this package:
   1. Use `mvn clean compile assembly:single` command to build it with every single dependency into a fat jar file, then use it as a classpath.
   2. You can add this maven project to another maven project as dependency. 
 
 ## What is important?
 
-The TFWConnector uses the `ObjectNode` class to parse JSON messages. You have to import first Jackson to use it. The Connector has connect()-close() methods. To use it, you have to connect() first, but never forget to use close() in the end of your operations.
+The TFWConnector uses the `ObjectNode` class to parse JSON messages. You have to import Jackson first to use it. The Connector has `connect()` and `close()` methods. To use it, you have to `connect()` first, but never forget to use `close()` in the end of your operations.
