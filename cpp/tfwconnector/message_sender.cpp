@@ -48,6 +48,11 @@ ptree MessageSender::create_messages_json_array(std::string originator,
         message_object.put("originator", originator);
         message_object.put("message", message);
 
+        /* 
+         * To make an array in p_tree, we have to push key-value pairs 
+         * with empty keys into the node.
+         * For more info read https://www.boost.org/doc/libs/1_67_0/doc/html/property_tree/parsers.html .
+         */
         message_array.push_back(std::make_pair("", message_object));
     }
 
