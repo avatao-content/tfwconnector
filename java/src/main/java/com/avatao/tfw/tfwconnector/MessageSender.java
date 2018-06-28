@@ -5,12 +5,7 @@
 
 package com.avatao.tfw.tfwconnector;
 
-import java.util.Date;
-import java.util.TimeZone;
 import java.util.List;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import com.avatao.tfw.tfwconnector.TFWServerConnector;
 
@@ -54,7 +49,6 @@ public class MessageSender {
         ObjectNode data = mapper.createObjectNode();
 
         data.put("originator", originator);
-        data.put("timestamp", getIsoDateTime());
         data.put("message", message);
 
         /* Build message. */
@@ -64,19 +58,6 @@ public class MessageSender {
         tfwMessage.put("data", data);
 
         serverConnector.send(tfwMessage);
-    }
-
-    /**
-      * @return current date time in ISO format
-      */
-    private String getIsoDateTime() {
-        TimeZone timeZone = TimeZone.getTimeZone("UTC");
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        dateFormat.setTimeZone(timeZone);
-
-        String isoFormat = dateFormat.format(new Date());
-        return isoFormat;
     }
 
     /**
