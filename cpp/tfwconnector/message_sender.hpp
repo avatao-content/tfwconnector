@@ -9,6 +9,7 @@
 #include "tfw_server_connector.hpp"
 
 #include <string>
+#include <vector>
 
 namespace tfwconnector {
     /**
@@ -19,18 +20,28 @@ namespace tfwconnector {
       private:
         TFWServerConnector server_connector;
         std::string key;
-      public:
+        std::string queue_key;
+
         /**
-         *  @param custom_key The key the MessageSender sends the messages with
-         *  (default value: "message").
+         * Create a JSON array out of a originator and a message queue.
+         * @param originator name of sender to be displayed on the frontend
+         * @param messages list of messages to queue 
          */
-        MessageSender(std::string custom_key = "message");
+        ptree create_messages_json_array(std::string originator, std::vector<std::string> messages);
+      public:
+        MessageSender();
         /** 
-          * Send a message with the key specified in the constructor.
-          * @param originator name of sender to be displayed on the frontend
-          * @param message message to send
-          */
+         * Send a message with the key specified in the constructor.
+         * @param originator name of sender to be displayed on the frontend
+         * @param message message to send
+         */
         void send(std::string originator, std::string message);
+        /**
+         * Queue a list of messages to be displayed in a chatbot-like manner.
+         * @param originator name of sender to be displayed on the frontend
+         * @param messages list of messages to queue 
+         */
+        void queue_messages(std::string originator, std::vector<std::string> messages);
     };
 };
 
