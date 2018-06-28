@@ -33,15 +33,6 @@ public class MessageSender {
         serverConnector = new TFWServerConnector();
     }
 
-    /**
-     *  @param customKey The key the MessageSender sends the messages with.
-     */
-    public MessageSender(String customKey) {
-        this.key = customKey;
-        this.queueKey = "queueMessages";
-        serverConnector = new TFWServerConnector();
-    }
-
     /** Connect to the TFWServer. */
     public void connect() {
         serverConnector.connect();
