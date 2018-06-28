@@ -7,6 +7,7 @@ package com.avatao.tfw.tfwconnector;
 
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.List;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import com.avatao.tfw.tfwconnector.TFWServerConnector;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 /**
  *  Provides a mechanism to send messages to our frontend messaging component which
@@ -23,9 +25,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class MessageSender {
     private TFWServerConnector serverConnector;
     private String key;
+    private String queueKey;
 
     public MessageSender() {
         this.key = "message";
+        this.queueKey = "queueMessages";
         serverConnector = new TFWServerConnector();
     }
 
@@ -34,6 +38,7 @@ public class MessageSender {
      */
     public MessageSender(String customKey) {
         this.key = customKey;
+        this.queueKey = "queueMessages";
         serverConnector = new TFWServerConnector();
     }
 
@@ -83,4 +88,46 @@ public class MessageSender {
         return isoFormat;
     }
 
+    /**
+     * Queue a list of messages to be displayed in a chatbot-like manner.
+     * @param originator name of sender to be displayed on the frontend
+     * @param messages list of messages to queue 
+     */
+    public void queueMessages(String originator, List<String> messages) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        ArrayNode messageArray = createMessagesJsonArray(originator, messages);
+
+        ObjectNode data = mapper.createObjectNode();
+        data.put("messages", messageArray);
+
+        /* Build message. */
+        ObjectNode tfwMessage = mapper.createObjectNode();
+
+        tfwMessage.put("key", this.queueKey);
+        tfwMessage.put("data", data);
+
+        serverConnector.send(tfwMessage);
+    }
+
+    /**
+     * Create a JSON array out of a originator and a message queue.
+     * @param originator name of sender to be displayed on the frontend
+     * @param messages list of messages to queue 
+     */
+    ArrayNode createMessagesJsonArray(String originator, List<String> messages) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        ArrayNode messageArray = mapper.createArrayNode();
+
+        for(String message : messages) {
+            ObjectNode messageNode = mapper.createObjectNode();
+            messageNode.put("originator", originator);
+            messageNode.put("message", message);
+
+            messageArray.add(messageNode);
+        }
+
+        return messageArray; 
+    }
 }
