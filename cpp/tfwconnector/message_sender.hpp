@@ -29,11 +29,7 @@ namespace tfwconnector {
          */
         ptree create_messages_json_array(std::string originator, std::vector<std::string> messages);
       public:
-        /**
-         *  @param custom_key The key the MessageSender sends the messages with
-         *  (default value: "message").
-         */
-        MessageSender(std::string custom_key = "message");
+        MessageSender();
         /** 
          * Send a message with the key specified in the constructor.
          * @param originator name of sender to be displayed on the frontend

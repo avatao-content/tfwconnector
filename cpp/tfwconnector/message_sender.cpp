@@ -11,7 +11,7 @@
 using boost::property_tree::ptree;
 using tfwconnector::MessageSender;
 
-MessageSender::MessageSender(std::string custom_key) : key(custom_key), queue_key("queueMessages") {}
+MessageSender::MessageSender() : key("message"), queue_key("queueMessages") {}
 
 void MessageSender::send(std::string originator, std::string message) {
     /* Make data field. */
