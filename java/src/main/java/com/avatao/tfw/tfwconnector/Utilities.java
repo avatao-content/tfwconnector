@@ -13,18 +13,24 @@ public class Utilities {
         this.serverConnector = serverConnector;
     }
 
+    public Utilities() {
+        serverConnector = new TFWServerConnector();
+        serverConnector.connect();
+    }
+
     /**
      * Send a trigger to the FSM to activate a transition
-     * @param message transition you want to trigger
+     * @param trigger transition you want to trigger
      */
-    public void sendTrigger(String message) {
+    public void sendTrigger(String trigger) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode triggerMessage = mapper.createObjectNode();
 
         triggerMessage.put("key", "");
-        triggerMessage.put("trigger", message);
+        triggerMessage.put("trigger", trigger);
 
         serverConnector.send(triggerMessage);
     }
 
 }
+
