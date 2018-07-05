@@ -2,13 +2,13 @@
 let MessageSender = require('./MessageSender');
 
 
-class Utilities{
+class TFWUtilities{
 
     constructor(messageSender){
         if(messageSender instanceof MessageSender){
             this.messageSender = messageSender;
         }else{
-            console.error("Utilities class needs an instance of MessageSender!");
+            console.error("TFWUtilities class needs an instance of MessageSender!");
         }
     }
 
@@ -62,4 +62,4 @@ class Utilities{
 
 }
 
-module.exports = Utilities;
+module.exports = TFWUtilities;

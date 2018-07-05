@@ -23,21 +23,25 @@ class MessageSender{
             key: key,
             data: {
                 originator: name,
-                timestamp: Date.now(),
                 message: message
             }
         };
         let messageToSend = createTFWMessage(data);
         this.connector.pushSocket.send(messageToSend);
     }
-    //TODO waiting for it to be implemented by core team
-    sendMessages(messages){
-        if(Array.isArray(messages) && messages.length > 0){
-            messages.forEach(message=>{
-                console.log("Sending message: " + message);
-                setTimeout(this.sendMessage(message), 1000);
-            });
-        }
+
+    sendMessages(messages, name = "avataobot"){
+        let key = "queueMessages";
+        let messagesToSend = [];
+        messages.forEach(message=>{
+           messagesToSend.push({originator: name, message: message});
+        });
+        let data = {
+            key: key,
+            data: {messages: messagesToSend}
+        };
+        let messageToSend = createTFWMessage(data);
+        this.connector.pushSocket.send(messageToSend);
     }
 
     sendToEventHandlers(message){
