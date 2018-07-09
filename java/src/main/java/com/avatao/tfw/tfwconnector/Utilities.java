@@ -8,12 +8,15 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public class Utilities {
     private TFWServerConnector serverConnector;
+    private ObjectMapper mapper;
 
     public Utilities(TFWServerConnector serverConnector) {
+        mapper = new ObjectMapper();
         this.serverConnector = serverConnector;
     }
 
     public Utilities() {
+        mapper = new ObjectMapper();
         serverConnector = new TFWServerConnector();
         serverConnector.connect();
     }
@@ -23,7 +26,6 @@ public class Utilities {
      * @param trigger transition you want to trigger
      */
     public void sendTrigger(String trigger) {
-        ObjectMapper mapper = new ObjectMapper();
         ObjectNode triggerMessage = mapper.createObjectNode();
 
         triggerMessage.put("key", "");
