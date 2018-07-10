@@ -34,5 +34,18 @@ public class Utilities {
         serverConnector.send(triggerMessage);
     }
 
+    public void setView(String viewType){
+        ObjectNode viewMessage = mapper.createObjectNode();
+        ObjectNode data = mapper.createObjectNode();
+
+        data.put("command", "layout");
+        data.put("value", viewType);
+
+        viewMessage.put("key", "dashboard");
+        viewMessage.put("data", data);
+
+        serverConnector.send(viewMessage);
+    }
+
 }
 
