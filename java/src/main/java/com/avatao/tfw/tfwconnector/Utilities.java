@@ -34,6 +34,10 @@ public class Utilities {
         serverConnector.send(triggerMessage);
     }
 
+    /**
+     * Send a message to the frontend for change the view 
+     * @param viewType view you want to change to
+     */
     public void setView(String viewType){
         ObjectNode viewMessage = mapper.createObjectNode();
         ObjectNode data = mapper.createObjectNode();
