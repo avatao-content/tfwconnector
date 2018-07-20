@@ -19,17 +19,17 @@ class TFWServerConnector:
 
     def send_to_eventhandler(self, message):
         """
-        Send a message to an event handler.
+        Send a message to an event handler through the TFW server.
+
         This envelopes the desired message in the 'data' field of the message to
         TFWServer, which will mirror it to event handlers.
 
         :param message: JSON message you want to send
-        :param message['key']: key of event handler you want to address
         """
-        nested_message = {'key': message['key'], 'data': message.pop('data')}
-        message['key'] = 'mirror'
-        message['data'] = nested_message
-        self.send(message)
+        self.send({
+            'key': 'mirror',
+            'data': message
+        })
 
     def send(self, message):
         """
