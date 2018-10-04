@@ -102,4 +102,21 @@ public class MessageSender {
 
         return messageArray; 
     }
+    
+    public void writeToConsole(String message) {
+        ObjectMapper mapper = new ObjectMapper();
+        /* Build data field. */
+        ObjectNode data = mapper.createObjectNode();
+
+        data.put("command", "write");
+        data.put("content", message);
+
+        /* Build message. */
+        ObjectNode tfwMessage = mapper.createObjectNode();
+
+        tfwMessage.put("key", "console");
+        tfwMessage.put("data", data);
+
+        serverConnector.send(tfwMessage);
+    }
 }
