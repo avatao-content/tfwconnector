@@ -15,7 +15,7 @@ class TFWServerConnector:
     def __init__(self):
         self._zmq_context = zmq.Context.instance()
         self._zmq_push_socket = self._zmq_context.socket(zmq.PUSH)
-        self._zmq_push_socket.connect(f'tcp://localhost:{os.environ["TFW_RECEIVER_PORT"]}')
+        self._zmq_push_socket.connect('tcp://localhost:' + {os.environ["TFW_RECEIVER_PORT"]})
 
     def send_to_eventhandler(self, message):
         """
