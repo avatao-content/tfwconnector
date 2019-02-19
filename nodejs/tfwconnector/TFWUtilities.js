@@ -4,6 +4,7 @@ let MessageSender = require('./MessageSender');
 
 class TFWUtilities{
 
+
     constructor(messageSender){
         if(messageSender instanceof MessageSender){
             this.messageSender = messageSender;
@@ -11,6 +12,7 @@ class TFWUtilities{
             console.error("TFWUtilities class needs an instance of MessageSender!");
         }
     }
+
 
     setView(viewType) {
         let key = "dashboard";
@@ -24,6 +26,7 @@ class TFWUtilities{
         this.messageSender.send(key, data);
     }
 
+
     writeShell(command) {
         let data = {
                 key: "shell",
@@ -34,6 +37,7 @@ class TFWUtilities{
         };
         this.messageSender.sendToEventHandlers(data);
     }
+
 
     stepNextState(){
         let key = "";
@@ -47,6 +51,7 @@ class TFWUtilities{
         this.messageSender.send(key,data);
     }
 
+
     stepToState(state){
         let key = "";
         let data = {
@@ -58,8 +63,6 @@ class TFWUtilities{
         };
         this.messageSender.send(key,data);
     }
-
-
 }
 
 module.exports = TFWUtilities;

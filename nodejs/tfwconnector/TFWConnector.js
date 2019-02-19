@@ -12,16 +12,17 @@ const SUB_ADDRESS = "tcp://localhost:" + SUB_PORT,
 
 class TFWConnector {
 
+
     constructor() {
         this.pushSocket = pushSock.connect(PUSH_ADDRESS);
         this.subSocket = subSock.connect(SUB_ADDRESS);
         console.log("Push socket connected to: " + PUSH_ADDRESS + "\n" + "Subscribe socket connected to: " + SUB_ADDRESS);
     }
 
+
     subscribe(key) {
         this.subSocket.subscribe(key);
     }
-
 }
 
 

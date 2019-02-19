@@ -1,8 +1,9 @@
 'use strict';
-let TFWConnector = require('./TWFConnector');
+let TFWConnector = require('./TFWConnector');
 
 
 class MessageSender{
+
 
     constructor(connector){
         if(connector instanceof TFWConnector){
@@ -12,10 +13,12 @@ class MessageSender{
         }
     }
 
+
     send(key, data){
         let messageToSend = createTFWMessage(data);
         this.connector.pushSocket.send(messageToSend);
     }
+
 
     sendMessage(message, name = "avataobot") {
         let key = "message";
@@ -29,6 +32,7 @@ class MessageSender{
         let messageToSend = createTFWMessage(data);
         this.connector.pushSocket.send(messageToSend);
     }
+
 
     sendMessages(messages, name = "avataobot"){
         let key = "queueMessages";
@@ -44,6 +48,7 @@ class MessageSender{
         this.connector.pushSocket.send(messageToSend);
     }
 
+
     sendToEventHandlers(message){
         let key = "mirror";
         let data = {
@@ -55,6 +60,7 @@ class MessageSender{
     }
 
 }
+
 
 let createTFWMessage = (message) => {
     return [Buffer.from(message.key), Buffer.from(JSON.stringify(message))]
